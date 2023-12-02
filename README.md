@@ -59,3 +59,9 @@
   - `tinker`에서도 사용 가능하다.
 - controller 생성: `php artisan make:controller {controller-name}`
 ### Cache
+- `.env`의 `CACHE_DRIVER`를 확인
+- `config/cache.php`에서 읽는다.
+- `php artisan cache:clear`: 캐시 초기화
+- Client Cache
+  - 이미지의 경우 변경될 여지가 더 적다.
+  - 따라서 이미지 전송은 Client Cache를 이용한다(`E-tag` 및 304 Not Modified 이용)

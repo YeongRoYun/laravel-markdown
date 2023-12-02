@@ -28,4 +28,9 @@ class Documentation
     {
         return str_replace("/docs/{{version}}", "/docs", $content);
     }
+
+    public function etag(string $file): string {
+        $lastModified = File::lastModified($this->path($file));
+        return md5($file, $lastModified);
+    }
 }

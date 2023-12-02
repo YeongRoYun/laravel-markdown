@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // local 환경에서만 Provider 등록
+//        if ($this->app->environment("local")) {
+//            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+//        }
     }
 
     /**

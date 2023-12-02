@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -23,8 +24,16 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, Request $request) {
+            if (app()->environment("production")) {
+                $statusCode = 404;
+                $title = "죄송합니다";
+                $description = $e->getMessage() ?: "요청하신 페이지가 없습니다.";
+                return response()->view("errors.notice", [
+                    "title" => $title,
+                    "description" => $description
+                ], $statusCode);
+            }
         });
     }
 }

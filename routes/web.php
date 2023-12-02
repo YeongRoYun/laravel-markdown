@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/docs/{file?}", function (string $file = null) {
+    $doc = new App\Models\Documentation();
+    if ($file == null) {
+        $text = $doc->get();
+    } else {
+        $text = (new App\Models\Documentation())->get($file);
+    }
+    return app(ParsedownExtra::class)->text($text);
+});

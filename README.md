@@ -42,3 +42,20 @@
     - [문서 참고](https://laravel.com/docs/10.x/errors#rendering-exceptions)
     - `renderable`/`reportable`에 등록한 함수가 아무 값을 반환하지 않는다면 기본 함수까지 올라간다.
     - `abort(status_code, "message")` 로 간단하게 HTTPException 을 보낼 수 있다.
+- `auto_load`
+  - 함수를 사용하기 위해서는 함수 정의 후 `auto_load`로 찾을 수 있도록 구성해야 한다.
+  ```
+  <config.json>
+  "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": ["app/Helpers/markdown.php"]
+    },
+  ```
+  -  `composer dump-autoload --optimize`로 reload
+  - `tinker`에서도 사용 가능하다.
+- controller 생성: `php artisan make:controller {controller-name}`
+### Cache
